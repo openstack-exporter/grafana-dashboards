@@ -1070,7 +1070,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(openstack_nova_memory_used_bytes)/ 1024 / 1024 / 1024 / 1024",
+          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\"}) / 1024 / 1024",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1078,7 +1078,7 @@
           "refId": "A"
         },
         {
-          "expr": "sum(openstack_nova_memory_available_bytes) / 1024 / 1024 / 1024 / 1024",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\"}) / 1024 / 1024",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -1165,7 +1165,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(openstack_nova_vcpus_used)",
+          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1173,7 +1173,7 @@
           "refId": "A"
         },
         {
-          "expr": "sum(openstack_nova_vcpus)",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "total vcpu cores",
@@ -1257,14 +1257,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(openstack_nova_local_storage_used_bytes)/1024/1024/1024/1024/1024",
+          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"DISK_GB\"})/1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "local storage used",
           "refId": "A"
         },
         {
-          "expr": "sum(openstack_nova_local_storage_available_bytes)/1024/1024/1024/1024/1024",
+          "expr": "avg(openstack_placement_resource_total{resourcetype=\"DISK_GB\"})/1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "local storage available",
@@ -1274,7 +1274,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Local Storage",
+      "title": "Local Storage (TB)",
       "tooltip": {
         "shared": false,
         "sort": 0,
@@ -1552,14 +1552,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(openstack_nova_running_vms)",
+          "expr": "count(openstack_nova_server_status{status=\"ACTIVE\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "running vms",
           "refId": "A"
         },
         {
-          "expr": "sum(openstack_nova_total_vms)",
+          "expr": "count(openstack_nova_server_status)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "total vms",
