@@ -1264,7 +1264,7 @@
           "refId": "A"
         },
         {
-          "expr": "avg(openstack_placement_resource_total{resourcetype=\"DISK_GB\"})/1024",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"DISK_GB\"})/1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "local storage available",
